@@ -1,12 +1,12 @@
-import { EVENTS } from "../../constants/constants";
+import "./Events.css"
 
-const Events = ({ date }) => {
+const Events = ({ date, events }) => {
   const eventDate = new Date(date).toLocaleDateString();
-  const events = EVENTS.filter(event => eventDate === event.date);
+  const currentEvent = events.filter(event => eventDate === event.date);
 
   return (
-    <>
-      {events.map(obj => (
+    <div className="events-container">
+      {currentEvent.map(obj => (
         <div
           key={obj.title + obj.startTime}
           style={{ backgroundColor: obj.color }}
@@ -15,7 +15,7 @@ const Events = ({ date }) => {
           {obj.title}
         </div>
       ))}
-    </>
+    </div>
   );
 };
 

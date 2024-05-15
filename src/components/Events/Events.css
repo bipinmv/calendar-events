@@ -1,0 +1,13 @@
+.events-container {
+  overflow: auto;
+  height: 80%;
+}
+
+.events-container::-webkit-scrollbar {
+  width: 3px !important;
+  background-color: #7f8083 !important;
+}
+
+.events-container::-webkit-scrollbar-thumb {
+  background-color: #98999d;
+}

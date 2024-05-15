@@ -1,5 +1,7 @@
 import { EVENTS, MONTHS } from "../../constants/constants";
+import EventCanvas from "../Events/EventCanvas";
 import Events from "../Events/Events";
+import Overlay from "../Overlay/Overlay";
 import "./Calendar.css";
 import { useCallback, useState } from "react";
 
@@ -41,14 +43,23 @@ const Calendar = () => {
       );
       const classNames = ["calendar-cell"];
       if (isCurrentDate(date)) classNames.push("current-date");
-      if (hasEvents(date)) classNames.push("has-events");
-
-      calendarGrid.push(
-        <div key={day} className={classNames.join(" ")}>
-          <span>{day}</span>
-          <Events date={date} />
-        </div>
-      );
+      if (hasEvents(date)) {
+        classNames.push("has-events");
+        calendarGrid.push(
+          <Overlay content={<EventCanvas events={EVENTS} key={day} />}>
+            <div className={classNames.join(" ")}>
+              <span>{day}</span>
+              <Events date={date} events={EVENTS} />
+            </div>
+          </Overlay>
+        );
+      } else {
+        calendarGrid.push(
+          <div key={day} className={classNames.join(" ")}>
+            <span>{day}</span>
+          </div>
+        );
+      }
     }
 
     return calendarGrid;
