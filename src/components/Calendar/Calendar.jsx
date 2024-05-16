@@ -1,4 +1,5 @@
 import { EVENTS, MONTHS } from "../../constants/constants";
+import { getddMMyyyyFormat } from "../../utility/utility";
 import EventCanvas from "../Events/EventCanvas";
 import Events from "../Events/Events";
 import Overlay from "../Overlay/Overlay";
@@ -41,10 +42,10 @@ const Calendar = () => {
         currentMonth.getMonth(),
         day
       );
-      const eventDate = new Date(date).toLocaleDateString();
-      const currentEvent = EVENTS
-        .filter(event => eventDate === event.date)
-        .sort((a, b) => a.startTime - b.startTime);
+      const eventDate = getddMMyyyyFormat(date);
+      const currentEvent = EVENTS.filter(
+        event => eventDate === event.date
+      ).sort((a, b) => a.startTime - b.startTime);
 
       const classNames = ["calendar-cell"];
       if (isCurrentDate(date)) classNames.push("current-date");
@@ -70,7 +71,7 @@ const Calendar = () => {
     return calendarGrid;
   }, [currentMonth, year]);
 
-  // Function to highlight the current date within the calendar grid
+  // To highlight the current date within the calendar grid
   const isCurrentDate = date => {
     const today = new Date();
     return (
@@ -80,12 +81,9 @@ const Calendar = () => {
     );
   };
 
-  // Function to check if a date has events
   const hasEvents = date => {
-    const eventDate = new Date(date).toLocaleDateString();
-    return EVENTS.some(event => {
-      return eventDate === event.date;
-    });
+    const eventDate = getddMMyyyyFormat(date);
+    return EVENTS.some(event => eventDate === event.date);
   };
 
   return (

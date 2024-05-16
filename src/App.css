@@ -101,4 +101,10 @@ body {
   white-space: nowrap;
 }
 
+@media only screen and (max-width: 550px) {
+  .p-5 {
+    padding: 1rem;
+  }
+}
+
 /** utility classes end here*/
