@@ -18,7 +18,7 @@ const EventCanvas = ({ events }) => {
     const sortedEvents = events.sort((a, b) => a.startTime - b.startTime);
 
     // Calculate canvas dimensions based on maximum event end time
-    const maxEndTime = Math.max(...sortedEvents.map((event) => event.endTime));
+    const maxEndTime = Math.max(...sortedEvents.map(event => event.endTime));
     canvas.width =
       timeColumnWidth + sortedEvents.length * (eventHeight + eventGap);
     canvas.height = maxEndTime * (eventHeight + eventGap) + eventGap;
@@ -42,16 +42,20 @@ const EventCanvas = ({ events }) => {
       const width = eventHeight;
       const height = (event.endTime - event.startTime) * eventHeight;
 
-      ctx.fillStyle = "#3498db";
+      ctx.fillStyle = event.color;
       ctx.fillRect(x, y, width, height);
 
       // Draw event text
       ctx.fillStyle = "#ffffff";
-      ctx.fillText(event.title, x + eventMargin, y + eventMargin);
+      ctx.fillText(event.title, x + eventMargin, y + 12);
     });
   }, [events]);
 
-  return <canvas ref={canvasRef} />;
+  return (
+    <div className="event-canvas">
+      <canvas ref={canvasRef} />
+    </div>
+  );
 };
 
 export default EventCanvas;

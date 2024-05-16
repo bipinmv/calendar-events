@@ -1,8 +1,12 @@
 import "./App.css";
-import Home from "./components/Home";
+import Calendar from "./components/Calendar/Calendar";
 
 const App = () => {
-  return <Home />;
-}
+  return (
+    <div className="p-5">
+      <Calendar />
+    </div>
+  );
+};
 
 export default App;

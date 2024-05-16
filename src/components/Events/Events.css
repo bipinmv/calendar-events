@@ -11,3 +11,8 @@
 .events-container::-webkit-scrollbar-thumb {
   background-color: #98999d;
 }
+
+.event-canvas {
+  overflow: auto;
+  max-height: 40vh;
+}

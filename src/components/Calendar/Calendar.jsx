@@ -41,15 +41,20 @@ const Calendar = () => {
         currentMonth.getMonth(),
         day
       );
+      const eventDate = new Date(date).toLocaleDateString();
+      const currentEvent = EVENTS
+        .filter(event => eventDate === event.date)
+        .sort((a, b) => a.startTime - b.startTime);
+
       const classNames = ["calendar-cell"];
       if (isCurrentDate(date)) classNames.push("current-date");
       if (hasEvents(date)) {
         classNames.push("has-events");
         calendarGrid.push(
-          <Overlay content={<EventCanvas events={EVENTS} key={day} />}>
+          <Overlay content={<EventCanvas events={currentEvent} key={day} />}>
             <div className={classNames.join(" ")}>
               <span>{day}</span>
-              <Events date={date} events={EVENTS} />
+              <Events events={currentEvent} />
             </div>
           </Overlay>
         );
